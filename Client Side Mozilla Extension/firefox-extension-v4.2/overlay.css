@@ -1,0 +1,120 @@
+/* valid and failed overlay */
+* {box-sizing: border-box;}
+
+/* overlay container common tags */
+.overlay-container {
+  position: relative;
+  padding: 5px;
+}
+
+.overlay {
+  position: absolute; 
+  top: 10px; 
+  left: 10px;
+ /* transition: .5s ease; */
+  opacity:1;
+  padding: 5px;
+}
+
+.overlay .card-body {
+  padding: 0.75rem !important;
+}
+
+.overlay-container ul {
+  list-style-type: none;
+  padding-left: 0.75rem !important;
+}
+
+.overlay-container ul li {
+  padding-bottom: 0.50rem !important;
+}
+
+.overlay-container .verify-card {
+  display: none;
+}
+
+/* verification success */
+
+.overlay-container-verify-success {
+    border: green 2px solid;
+}
+
+.overlay i.verify-success{
+    color: rgba(0, 256, 0, 0.5);
+    cursor: pointer;
+}
+
+.overlay-container-verify-success:hover {
+    border: springgreen 2px solid;
+}
+
+/* verification fail */
+
+.overlay-container-verify-fail {
+  border: red 2px solid;
+}
+
+.overlay i.verify-fail{
+  color: red;
+  cursor: pointer;
+}
+
+.overlay-container-verify-fail:hover {
+  border: red 2px solid;
+}
+
+/* verification incomplete */
+
+.overlay-container-verify-incomplete {
+  border: darkblue 2px solid;
+}
+
+.overlay i.verify-incomplete{
+  color: blue;
+  cursor: pointer;
+}
+
+.overlay-container-verify-incomplete:hover {
+  border: blue 2px solid;
+}
+  
+  .text-block {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: whitesmoke;
+    color: red;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .container img {vertical-align: middle;}
+  
+  .container .content {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Animate output display */
+  .fade-in {
+    animation: fadein .5s;
+  }
+  
+  @keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+  }

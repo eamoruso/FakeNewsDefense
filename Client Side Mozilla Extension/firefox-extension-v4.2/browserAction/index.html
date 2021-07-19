@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="UTF-8">
+    <title>Fake News Image Analyzer</title>
+    <script src="script.js"></script>
+  </head>
+  <style>
+    #myProgress {
+      width: 100%;
+      background-color: #ddd;
+    }
+    #myBar {
+      width: 1%;
+      background-color: #939b91;
+      text-align: center;
+      color: white;
+    }
+  </style>
+  <body>
+    <div id="wrapper">
+      <div id="menu-items">
+        <div id="titletext">
+          <img class="header-logo" height="50px" width="50px" src="/icons/icon.png">
+          <span id="header-icons">
+            <span style="color:green;font-weight: bold;">Plugin Enabled (Version 4.2)</span>
+          </span>
+        </div>
+        <div> ---------------------------------------------- </div>
+        <div id="myProgress">
+          <div id="myBar">1%</div>
+        </div>
+        <div id="mainGroup" class="box" style="display: block;">
+          <div style="color:red;font-weight: bold;" class="header1">Fake Images: <b id="fake-news-images-count"></b> </div>
+          <div style="color:green;font-weight: bold;" class="header1">Valid Images: <b id="valid-images-count"></b> </div>
+          <div style="color:blue;font-weight: bold;" class="header1">Skipped Images: <b id="skip-images-count"></b> </div>
+        <div id="separator-1" class="separator" style="display: none;"></div>
+        <div id="separator-2" class="separator" style="display: none;"></div>
+      </div>
+      <div> ---------------------------------------------- </div>
+        <div id="block_counts" class="box" style="display: block;">
+          <div i18n="blocked_ads" class="header1">Time taken to analyze: <b id="fake-news-time-took">N/A</b></div>
+          <!-- <div i18n="blocked_ads" class="header1">Server Cert: <b id="cert-images-info">N/A</b></div> -->
+        </div>
+      </div>
+      <div class="no-data"></div>
+  </div>
+  </body>
+</html>
