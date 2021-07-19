@@ -18,6 +18,7 @@ a simple Javascript browser extension written for Mozilla's Firefox web browser.
 
 # Author
 Original idea & project management: Cliff C. Zou
+
 Design & development: Edward Amoruso, Steve Johnson, Raghu Avula.
 
 # LICENSE
