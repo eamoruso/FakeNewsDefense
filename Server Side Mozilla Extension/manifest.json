@@ -1,0 +1,47 @@
+{
+  "manifest_version": 2,
+  "name": "Fake Server Tool",
+  "description": "Fake News Server Tool",
+  "version": "4.0",
+  "icons": {
+    "64": "icons/icon64.png"
+  },
+  "background": {
+    "scripts": [
+      "background_script.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.mozilla.org/*"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "bookmarks",
+    "<all_urls>",
+    "notifications",
+    "*://*/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "64": "icons/icon.png"
+    },
+    "default_popup": "browserAction/index.html",
+    "default_title": "Action"
+  },
+  "options_ui": {
+    "page": "options/index.html"
+  }
+}

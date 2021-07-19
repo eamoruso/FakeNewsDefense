@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fake News Web Crypto API</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main>
+      <h1>Fake News: Signing Server Tool</h1>
+      <section class="examples">
+        <section class="sign-verify rsa-pss">
+          <h2 class="sign-verify-heading">RSA-PSS Tool</h2>
+          <section class="sign-verify-controls">
+            <div class="message-control">
+              <label for="rsa-pss-message">Enter a message to sign:</label>
+              <input type="text" id="rsa-pss-message" name="message" size="57"
+                     value="b9232a045ed0353d60a23be71a2d8adb4d650a2193981f09b322a82eed96a30e">
+            </div>
+            <div class="priv-key-control">
+              <label for="rsa-pss Private Key">Enter Authenticators Private Key:</label>
+              <input type="text" id="rsa-pss-private-key" name="privkey" size="57"
+                     value="-----BEGIN PRIVATE KEY-----
+                     MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC65d5eHLKi4hjm
+                     f+xXJzWtTmXPpSVdyokhCVSf8Mu2/V/e+RMZ9agEphCK6VMbghEO5QMyP2+CGXDh
+                     gUxESMqWqyq1rfR0b/+prSxroIRGDT0OhR39X+XsKGxrUWvUDlaTyvnShCtBCyZ/
+                     Hzu5YhDlwGVC99vZfamy3BjsEFppF+ExdhwThn+0ZUM13LMM+j8j+LYnwqM8eYW0
+                     /WvJ1ZZ28t6O54x6yPk3aVKID4wf8aR9LCIMbj2APN+0FGdrv1PHgMeqAzoPa9UJ
+                     qBkU9zg0AJjarRwt3cJwwRYq5j3QIs0l6aWU1gb1soQW1loCsuYbJakfF3kmoReO
+                     2SrQnYhfAgMBAAECggEAAK/xtmTin0i3kLlttBBX2TBNnYrc7VBeWrm/DuuCxESA
+                     QsClulW17XZy3x/mh1ZeG7Dp5xhmn5LaYGnqTuH5pL4yZQKjwH3c8dHKNQcdFWjd
+                     DZ2ds53TqZ+obmiZPeljlh2L96M2yYFx/cuum4rpxv6DINDqhQ06P4chrFSPEI3d
+                     TzZpga0ruNVzUtCRnibzXavNSQhzva6Vz7L4ve25WJvrzOzIFifZ0YsofAfrKdwN
+                     GXKh7WlP7jdT6K8ZrcKQW2wjf1Y8cFvruu41VzCqDrVsix2sFOhVaj3X8uPip752
+                     y5zZsjiE+xR1NAvCzyTz5WJ2ocWpMVMIcyZtlU0iOQKBgQDx2z1V20G12UcCSdvR
+                     AbzE9LdR816Cvi0tmr4IqUE5kQ6Hzf4gHEu3jyT1WbJhD9qjiAqudDSkewu4k6i9
+                     lxcWVMHyOZhZ/nEfN7SSHu/xv22KKQMtOP3mC5vhSFSmS/CTxYsKbbF91M4p9g9E
+                     B2EhpMF09kt3OXQM/Zsx6y2X2wKBgQDF09yoYgnxJ2qRXtb/BVM76ggTplRu9Ow3
+                     7u0gT+KtRkWhRiLFqfmQ6Aa5ZSwZPYnE8Sqc+bJUecOb9evPKFEDCh6FRBYiWvQ9
+                     8eI+TjBwjH6bZgQDleTUWS+gdEWX6Pt6F3OF1R8CpkS3EfG6usaSLcb5fGchzzGH
+                     t5zLgeMqzQKBgAUHrT/i3nv8t9hZVuQC6D0kZcejixym/eOL61Xcx0l+NdInO5jJ
+                     Xd3EcV1U7zvLi52JD8fPDOU61eSR1ZmT0dwaCSqTfhKpEws2KmA7mnvpokqUTceb
+                     /tPQ+/30diY7QBairiCaZW2bhmoi/vBIQwHjHk7jbHBfVoWKpLamEH2vAoGAGNGR
+                     l1ZlZOnLBt3dHzVt0dB0nvJ5GUqE8Cd7fFhJWe+9AJSp/B5s/u79GPlGZQxBYoHX
+                     FMaGxu5XyhM6OE0YjMcSOSnnlPvQNI1KEwMANL6Li7dqvYBqqvFddkXgDUTfd9vF
+                     VH7+Wvi9GjKYHxMbom83zUj8L1OtJRe2BhoPg+kCgYAffmSaEIH8VYGAnzhfpOtj
+                     kJfuC1XBKihlxGRRUCk4VpgRfUfP/dwFZYPm2uhnj/JeOihgbi3867PTD5h+i4ND
+                     +gJyB1a6Qo6h2QMjlL5ESJHD4XTwcVbaU8nOMm0MNlGkPDJQFZPxxZ4WhhdYJL1+
+                     e0l+LyAzDnedx2ElQYnsYQ==
+                     -----END PRIVATE KEY-----">
+            </div>
+            <div class="pub-key-control">
+              <label for="rsa-pss Public Key">Enter a Public Key (extracted from X509):</label>
+              <input type="text" id="rsa-pss-public-key" name="pubkey" size="57"
+                     value="-----BEGIN PUBLIC KEY-----
+                     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuuXeXhyyouIY5n/sVyc1
+                     rU5lz6UlXcqJIQlUn/DLtv1f3vkTGfWoBKYQiulTG4IRDuUDMj9vghlw4YFMREjK
+                     lqsqta30dG//qa0sa6CERg09DoUd/V/l7Chsa1Fr1A5Wk8r50oQrQQsmfx87uWIQ
+                     5cBlQvfb2X2pstwY7BBaaRfhMXYcE4Z/tGVDNdyzDPo/I/i2J8KjPHmFtP1rydWW
+                     dvLejueMesj5N2lSiA+MH/GkfSwiDG49gDzftBRna79Tx4DHqgM6D2vVCagZFPc4
+                     NACY2q0cLd3CcMEWKuY90CLNJemllNYG9bKEFtZaArLmGyWpHxd5JqEXjtkq0J2I
+                     XwIDAQAB
+                     -----END PUBLIC KEY-----">
+            </div>
+            <div class="signature">Signature (copy below for XMP file):
+              <span class="signature-value">(click on sign)</span>
+            </div>
+            <input class="sign-button" type="button" value="Sign">
+            <input class="verify-button" type="button" value="Verify">
+          </section>
+        </section>
+     </section>
+    </main>
+  </body>
+  <script src="rsa-pss.js"></script>
+</html>
