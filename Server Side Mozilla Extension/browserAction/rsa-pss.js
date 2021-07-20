@@ -15,12 +15,12 @@
   let signatureXML;
 
   const pubHeader = '-----BEGIN PUBLIC KEY-----';
-  const pubKey = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuuXeXhyyouIY5n/sVyc1rU5lz6UlXcqJIQlUn/DLtv1f3vkTGfWoBKYQiulTG4IRDuUDMj9vghlw4YFMREjKlqsqta30dG//qa0sa6CERg09DoUd/V/l7Chsa1Fr1A5Wk8r50oQrQQsmfx87uWIQ5cBlQvfb2X2pstwY7BBaaRfhMXYcE4Z/tGVDNdyzDPo/I/i2J8KjPHmFtP1rydWWdvLejueMesj5N2lSiA+MH/GkfSwiDG49gDzftBRna79Tx4DHqgM6D2vVCagZFPc4NACY2q0cLd3CcMEWKuY90CLNJemllNYG9bKEFtZaArLmGyWpHxd5JqEXjtkq0J2IXwIDAQAB';
+  const pubKey = '';
   const pubFooter = '-----END PUBLIC KEY-----';
 
-  const priKeyHeader = '-----BEGIN PRIVATE KEY-----'
-  const privKey = 'MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC65d5eHLKi4hjmf+xXJzWtTmXPpSVdyokhCVSf8Mu2/V/e+RMZ9agEphCK6VMbghEO5QMyP2+CGXDhgUxESMqWqyq1rfR0b/+prSxroIRGDT0OhR39X+XsKGxrUWvUDlaTyvnShCtBCyZ/Hzu5YhDlwGVC99vZfamy3BjsEFppF+ExdhwThn+0ZUM13LMM+j8j+LYnwqM8eYW0/WvJ1ZZ28t6O54x6yPk3aVKID4wf8aR9LCIMbj2APN+0FGdrv1PHgMeqAzoPa9UJqBkU9zg0AJjarRwt3cJwwRYq5j3QIs0l6aWU1gb1soQW1loCsuYbJakfF3kmoReO2SrQnYhfAgMBAAECggEAAK/xtmTin0i3kLlttBBX2TBNnYrc7VBeWrm/DuuCxESAQsClulW17XZy3x/mh1ZeG7Dp5xhmn5LaYGnqTuH5pL4yZQKjwH3c8dHKNQcdFWjdDZ2ds53TqZ+obmiZPeljlh2L96M2yYFx/cuum4rpxv6DINDqhQ06P4chrFSPEI3dTzZpga0ruNVzUtCRnibzXavNSQhzva6Vz7L4ve25WJvrzOzIFifZ0YsofAfrKdwNGXKh7WlP7jdT6K8ZrcKQW2wjf1Y8cFvruu41VzCqDrVsix2sFOhVaj3X8uPip752y5zZsjiE+xR1NAvCzyTz5WJ2ocWpMVMIcyZtlU0iOQKBgQDx2z1V20G12UcCSdvRAbzE9LdR816Cvi0tmr4IqUE5kQ6Hzf4gHEu3jyT1WbJhD9qjiAqudDSkewu4k6i9lxcWVMHyOZhZ/nEfN7SSHu/xv22KKQMtOP3mC5vhSFSmS/CTxYsKbbF91M4p9g9EB2EhpMF09kt3OXQM/Zsx6y2X2wKBgQDF09yoYgnxJ2qRXtb/BVM76ggTplRu9Ow37u0gT+KtRkWhRiLFqfmQ6Aa5ZSwZPYnE8Sqc+bJUecOb9evPKFEDCh6FRBYiWvQ98eI+TjBwjH6bZgQDleTUWS+gdEWX6Pt6F3OF1R8CpkS3EfG6usaSLcb5fGchzzGHt5zLgeMqzQKBgAUHrT/i3nv8t9hZVuQC6D0kZcejixym/eOL61Xcx0l+NdInO5jJXd3EcV1U7zvLi52JD8fPDOU61eSR1ZmT0dwaCSqTfhKpEws2KmA7mnvpokqUTceb/tPQ+/30diY7QBairiCaZW2bhmoi/vBIQwHjHk7jbHBfVoWKpLamEH2vAoGAGNGRl1ZlZOnLBt3dHzVt0dB0nvJ5GUqE8Cd7fFhJWe+9AJSp/B5s/u79GPlGZQxBYoHXFMaGxu5XyhM6OE0YjMcSOSnnlPvQNI1KEwMANL6Li7dqvYBqqvFddkXgDUTfd9vFVH7+Wvi9GjKYHxMbom83zUj8L1OtJRe2BhoPg+kCgYAffmSaEIH8VYGAnzhfpOtjkJfuC1XBKihlxGRRUCk4VpgRfUfP/dwFZYPm2uhnj/JeOihgbi3867PTD5h+i4ND+gJyB1a6Qo6h2QMjlL5ESJHD4XTwcVbaU8nOMm0MNlGkPDJQFZPxxZ4WhhdYJL1+e0l+LyAzDnedx2ElQYnsYQ=='
-  const privKeyFooter = '-----END PRIVATE KEY-----'
+  const priKeyHeader = '-----BEGIN PRIVATE KEY-----';
+  const privKey = '';
+  const privKeyFooter = '-----END PRIVATE KEY-----';
   
   signatureXML = 'c3lK117xsOplcK65T41xpKB0ClabgmKkFBLxZds2r6kED1rtVXTA1i1bkzOfQsD06Pq3UJvjGWNHKeopGUCvxbuT/MRbrt8wRnX0I87EbNETrSJSVIRkyoJTc9nSMkt9jykSL5QPiE1IHVzJjbjvTftozuGTqnHtnLhay+i1/p3zaOU78XmIuQyQEDEmGNrwo11OYkw4yYyXvjB2cAr7qtOeOyTFoH1W1oWJlcqyPgk0POBmeAvggx7IJue9tX+TQ/eBfZqsbsP5WzoKHDSbbBkB69zTu/L45usEtKCYQknefHAApncZqgZwFfEauZvjTyXio7ykDbQQc9WHubK/gg==';
   console.log('XML signature:\n' + signatureXML.replace(/(.{64})/g,'$1\n'));
