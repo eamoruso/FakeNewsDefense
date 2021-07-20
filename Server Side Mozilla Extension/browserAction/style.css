@@ -63,7 +63,7 @@ input[type="button"] {
 /* Whole page grid */
 main {
     display: grid;
-    grid-template-columns: 32rem 1fr;
+    grid-template-columns: 34rem 1fr;
     grid-template-rows: 4rem 1fr;
 }
 
