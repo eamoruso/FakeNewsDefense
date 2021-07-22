@@ -66,8 +66,8 @@
 			position: absolute;
 			text-align: center;
 			top: 10%;
-			left: 15%;
-			right: 15%;
+			left: 10%;
+			right: 10%;
 		}
 		.news-middle-fail {
 			transition: .5s ease;
@@ -75,8 +75,8 @@
 			position: absolute;
 			text-align: center;
 			top: 10%;
-			left: 15%;
-			right: 15%;
+			left: 10%;
+			right: 10%;
 		}
 		.news-container:hover .news-middle-fail {
 			opacity: .8;
@@ -219,7 +219,7 @@
 		);
 	}
 	function getMessageEncoding(message) {
-		console.log('Message ('+ message.length + '): '+ message);
+		// console.log('Message ('+ message.length + '): '+ message);
 		let enc = new TextEncoder();
 		return enc.encode(message);
 	}
@@ -239,7 +239,7 @@
 		let signature = getSignatureEncoding(sigValue);
 		// console.log('Message encoding->', encoded);
 		// console.log('Public Key->', publicKey);
-		// console.log('Signature Used->', signature);
+		console.log('Signature Used for Verification: ', sigValue);
 		// console.log('SaltLength-> ' + saltLengthValue);
 		let results = window.crypto.subtle.verify(
 		{
@@ -455,32 +455,39 @@
 	// ------- Function to process each image on page-tab and verify with XML ------
 	// -----------------------------------------------------------------------------
 	function processImageVerification() {
+		var imgURL;
+		var imgXML;
+		var xmlURL;
+		var xhrImg;
+		var reader;
+
+		var strIMG = '';								// store image in base64 
+		var strINFO = '';								// store image information
+		var str = '';									// store both image and image info
+		var wrapper = [];								// used to wrap image with class
+
 		// --------------- Loop thru all of the images on current page tab --------------- //
 		for (let i = 0; i < imgs.length; i++) {
 			console.log('<---------------------' +' image: ' + i +' ----------------------->');
 			startTime[i] = new Date().getTime();
 			
-			var imgURL = document.querySelectorAll('img')[i].src;
-			var imgXML = document.getElementsByTagName('img')[i].getAttribute("x-media-cert");
+			imgURL = document.querySelectorAll('img')[i].src;
+			imgXML = document.getElementsByTagName('img')[i].getAttribute("x-media-cert");
 
 			if (imgXML === null) {
 				skipcnt++;
 				chrome.storage.local.set({ "skipcnt": skipcnt });
-				console.log('No x-media (sidecar file) found for:\n' + imgURL);
+				console.log('No x-media (sidecar file) found for ['+i+']:\n' + imgURL);
 			}
 			else{
 				console.log('Detected x-media (sidecar file) for:\n' + imgURL);
-				var strIMG = '';								// store image in base64 
-				var strINFO = '';								// store image information
-				var str = '';									// store both image and image info
-				var wrapper = [];								// used to wrap image with class
 
-				var xmlURL = location.protocol + '//' + location.host + imgXML;
+				xmlURL = location.protocol + '//' + location.host + '/' + imgXML;
 				
 				try{
-					var xhrImg = new XMLHttpRequest();
+					xhrImg = new XMLHttpRequest();
 					xhrImg.onload = function() {
-						var reader = new FileReader();
+						reader = new FileReader();
 						reader.onloadend = function() 
 						{
 							strIMG =  reader.result.replace('data:image/jpeg;base64,',''); // get image to base64
@@ -492,7 +499,7 @@
 					xhrImg.responseType = 'blob';
 					xhrImg.send();
 
-					console.log('Retrieving xml file: '+ xmlURL);
+					console.log('Retrieving xml file: ['+i+']: ' + xmlURL);
 					var xhrInfo = new XMLHttpRequest();
 					if (!xhrInfo) {
 						console.log('error getting XML file request');
@@ -516,14 +523,13 @@
 					// ------------ Concatinate values in xml and calc digest -------- //
 					strINFO = createdate+city+region+country+creatorName+creditLine+description+X509Certificate;
 					str = strINFO + strIMG;
-					var calcDigest = sha256(str);		
-					//console.log('Raw Data (newsInfo - cert - pic):\n' + str);
-					console.log('Calculated Digest ('+ calcDigest.length+ '): ' + calcDigest);
-					console.log('DigestValue from XML (' + digestvalue.length+'): '+ digestvalue);
+					var calcDigest = sha256(str);
+					console.log('Calculated Digest ['+i+'] Size(' + calcDigest.length+ '): ' + calcDigest);
+					console.log('DigestValue from XML ['+i+'] Size(' + digestvalue.length+'): '+ digestvalue);
 
 					// ------------------------ Webserver Certificate ------------------------- // 
-					var serverCertArray = byteArray;							// retrieved from website certificate
-					console.log('Server Certificate DER:', serverCertArray);	// show results to verify data	
+					// var serverCertArray = byteArray;							// retrieved from website certificate
+					// console.log('Server Certificate DER:', serverCertArray);	// show results to verify data	
 
 					// ------------------- check if server and XML X509 match -------------------//
 					// ------------------------- future feature 1 ------------------------------ //
@@ -579,8 +585,9 @@
 						x509subjectName: x509subjectName,
 						imgTime: imgTime,
 					};
-					imgInfo[cnt] = retObject;
-					cnt++;
+					imgInfo[i] = retObject;
+					// imgInfo[cnt] = retObject;
+					// cnt++;
 
 					importPubKey(pubKeyPEM).then((results) => {
 						importedPubKey = results;
@@ -588,6 +595,7 @@
 					}).then((results) => {
 						verifyMessage(importedPubKey, calcDigest, SignatureValue).then((resultV)=> {
 							isValid = resultV;
+							console.log('Signatures matched for ['+i+']: '+ isValid);
 							if (calcDigest === digestvalue && isValid) {
 								valcnt++;
 								chrome.storage.local.set({"valcnt": valcnt },function (){
@@ -595,8 +603,7 @@
 								});
 								//---create information over image---//
 								htmldiv[i] = validHTML('img'+ i, imgInfo[i]);
-								//htmlimg[i] = imageValidHTML('img'+ i);
-								// console.log('htmldiv Valid results: '+ htmldiv[i]);
+								console.log('htmldiv Valid results: '+ htmldiv[i]);
 								
 								let imgValidElement = document.getElementsByTagName('img')[i];
 								//---create wrapper over image---//
@@ -604,8 +611,7 @@
 								wrapper[i].className = "news-container";
 								wrapper[i].style.position = 'relative';
 								wrapper[i].innerHTML = imgValidElement.outerHTML;
-								// console.log('Valid imageElement: ', imgValidElement);
-								// console.log('Valid outerHTML: '+ imgValidElement.outerHTML);
+								console.log('Valid outerHTML: '+ imgValidElement.outerHTML);
 								imgValidElement.parentNode.insertBefore(wrapper[i], imgValidElement);
 								imgValidElement.remove();
 								//---identify and prep image elements---//
@@ -613,9 +619,6 @@
 								imgValidElement.style.border ="7px solid green";
 								imgValidElement.className = "news-image"
 								imgValidElement.insertAdjacentHTML("afterend", htmldiv[i]);
-								imgValidElement.onclick = function() {
-									console.log('clicked image --> '+ imgInfo[i].imgURL);
-								};
 							}
 							else {
 								failcnt++;
@@ -643,7 +646,7 @@
 						}).then((results) => {
 							startTime[i] = new Date().getTime() - startTime[i];
 							imgTime[i] = parseInt(startTime[i]);
-							console.log('image time: '+ imgTime[i] + 'ms');
+							console.log('image time ['+i+']: '+ imgTime[i] + 'ms');
 							totalTime = totalTime + imgTime[i];
 							chrome.storage.local.set({"totalTime":totalTime},function (){
 								console.log("totalTime storage succesful: "+ totalTime);
@@ -661,18 +664,18 @@
 	}
 	
 	// ------------- get server certificate information --------------- //
-	chrome.storage.local.get("certEntryCN",function (result){
-		serverCertCN = result.certEntryCN
-		console.log('Retrieved -> serverCertCN: ' + serverCertCN);
-	});
-	chrome.storage.local.get("cert",function (result){
-		serverCert = result.cert
-		//console.log('Retrieved -> serverCert: ' + serverCert);
-	});
-	chrome.storage.local.get("byteArrayCert",function (result){
-		byteArray = result.byteArrayCert;
-		//console.log('Retrieved -> byteArray: ',byteArray);
-	});
+	// chrome.storage.local.get("certEntryCN",function (result){
+	// 	serverCertCN = result.certEntryCN
+	// 	console.log('Retrieved -> serverCertCN: ' + serverCertCN);
+	// });
+	// chrome.storage.local.get("cert",function (result){
+	// 	serverCert = result.cert
+	// 	//console.log('Retrieved -> serverCert: ' + serverCert);
+	// });
+	// chrome.storage.local.get("byteArrayCert",function (result){
+	// 	byteArray = result.byteArrayCert;
+	// 	//console.log('Retrieved -> byteArray: ',byteArray);
+	// });
 	
 	console.log('mainURL: ' + mainURL);							// active url in tab
 	console.log('Total Images Found: ' + imgs.length);			// total images found
@@ -685,20 +688,20 @@
 	console.log("-> Valid imageInfo:", imgInfo);
 	console.log("<-----------------= END =----------------->\n");
 	
-	function validHTML(imageID, imgRetObj) {
+	function validHTML(imageID, imageObject) {
 		console.log('Image ID for Valid HTML: ' + imageID);
-		// '<img class="news-shield" src="data:image/png;base64, '+validImageIcon +'" width="32" height="32"/>'+
+		console.log('Image ID for Valid Object', imageObject);
 		var htmlvaliddiv = 
 		'<div class="news-middle-valid">' +
 			'<div class="valid-news-text">' + 'Verification Successful' + '</div>' +
 			'<div class="valid-news-text">' + '-----------------------' + '</div>' +
-			'<div class="valid-news-text">' + 'Signed by:  '+ imgRetObj.x509subjectName + '</div>' +
-			'<div class="valid-news-text">' + 'Author:  '+ imgRetObj.creatorName +'</div>' +
-			'<div class="valid-news-text">' + 'Date: '+ imgRetObj.createdate +'</div>' +
-			'<div class="valid-news-text">' + imgRetObj.city + ', '+
-				imgRetObj.region + ', ' +
-				imgRetObj.country + '</div>' +
-			'<div class="valid-news-text">' + imgRetObj.description + '</div>' +
+			'<div class="valid-news-text">' + 'Signed by:  '+ imageObject.x509subjectName + '</div>' +
+			'<div class="valid-news-text">' + 'Author:  '+ imageObject.creatorName +'</div>' +
+			'<div class="valid-news-text">' + 'Date: '+ imageObject.createdate +'</div>' +
+			'<div class="valid-news-text">' + imageObject.city + ', '+
+				imageObject.region + ', ' +
+				imageObject.country + '</div>' +
+			'<div class="valid-news-text">' + imageObject.description + '</div>' +
 		'</div>';
 		return htmlvaliddiv;
 	}
