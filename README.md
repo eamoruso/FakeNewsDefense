@@ -17,9 +17,7 @@ side car file (XMP) and verifying its endorsement and authenticity using
 a simple Javascript browser extension written for Mozilla's Firefox web browser.
 
 # Author
-Original Idea & Project Management:  Cliff C. Zou
-
-Design & Development:  Edward Amoruso,  Steve Johnson,  Raghu Avula.
+ Edward Amoruso
 
 # LICENSE
 GPL v3
